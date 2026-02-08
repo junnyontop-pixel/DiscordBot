@@ -2,8 +2,7 @@ import random
 import discord
 from discord.ext import commands
 import config
-
-# 유준아, 이 줄을 맨 위에 추가해봐! 프로그램이 돌아가는지 바로 알 수 있어.
+
 print(">> 봇 실행 준비 중... 잠시만 기다려줘!")
     
 intents = discord.Intents.all() # 권한을 '전체'로 넓혔어!
