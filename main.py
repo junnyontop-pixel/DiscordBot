@@ -5,7 +5,7 @@ import config
 import sqlite3
 
 # [1] 데이터베이스 초기 설정
-# 봇이 껐다 켜져도 유준이의 검 단계를 기억해주는 보물상자야.
+# 봇이 껐다 켜져도 검 단계를 기억해주는 보물상자야.
 conn = sqlite3.connect('bot_data.db')
 cursor = conn.cursor()
 
