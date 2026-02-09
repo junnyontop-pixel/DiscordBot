@@ -72,8 +72,18 @@ FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconne
 @bot.command()
 async def 노래(ctx):
     if ctx.author.voice:
-        await ctx.author.voice.channel.connect()
-        await ctx.send("🥛 웅장한 브금을 틀 준비가 됐어")
+        try:
+            # 1. 먼저 메시지를 보내서 봇이 반응하고 있다는 걸 보여줘!
+            await ctx.send("🥛 웅장한 브금을 틀기 위해 채널에 입장 중이야...")
+            
+            # 2. 연결 시도 (시간 제한 30초로 늘림)
+            await ctx.author.voice.channel.connect(timeout=30.0, reconnect=True)
+            
+            await ctx.send("✅ 입장 완료! 이제 `!재생 [제목]`을 입력해줘.")
+            
+        except Exception as e:
+            # 에러가 나면 유준이한테 왜 안 되는지 알려줘
+            await ctx.send(f"❌ 입장 실패... (이유: {e})")
     else:
         await ctx.send("노래 듣고 싶으면 먼저 음성 채널에 들어가줘!")
 
@@ -249,4 +259,5 @@ async def 배틀랭킹(ctx):
 print("봇 접속 시도 중...")
 
 # [7] 봇 실행
+
 bot.run(config.TOKEN)
